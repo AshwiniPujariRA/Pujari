@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">about</title>
+</head>
+<body>
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-8 offset-md-2">
+
+					<div class="my-card mt-3">
+
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}"
+							class="alert text-center" role="alert">
+							<p th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+
+
+						<div class="container  text-center">
+							<img class="" style="width: 70px;" src=""
+								th:src="@{/image/llp.png}">
+						</div>
+						<h1 class="text-center">Register Here !!</h1>
+						<form novalidate action="" th:action="@{/do_register}" method="post"
+							th:object="${user}">
+
+							<div class="form-group">
+								<label for="username11"> Your Name</label> <input name="name"
+									type="name" class="form-control "
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									 id="username11"
+									aria-describedby="emailHelp"
+									placeholder="Enter Your Name Here.. "
+									th:value="${user.name}"
+									 />
+									<div class="invlid-feedback" th:each="e :${#fields.errors('name')}" th:text="${e}"
+									id="validationServer03Feedback" ></div>
+									
+							</div>
+
+							<div class="form-group">
+								<label for="emailAddress11">Email Address</label> <input
+									name="email" type="email" class="form-control"
+									 th:classappend="${#fields.hasErrors('email') ? 'is-invalid':''}"
+									id="emailAddress11" aria-describedby="emailHelp"
+									placeholder="Enter Email Address Here.."
+									 required
+									th:value="${user.email}"
+									/>
+									<div class="invlid-feedback" th:each="e :${#fields.errors('email')}" th:text="${e}"
+									id="validationServer03Feedback" ></div>
+									
+							</div>
+
+							<div class="form-group">
+								<label for="password11">Password</label> <input name="password"
+									type="password" class="form-control" 
+									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+									id="Password11"
+									aria-describedby="emailHelp"
+									placeholder="Enter Password Here.."
+									 required
+									th:value="${user.password}"
+									 >
+									<div  class="invlid-feedback" th:each="e :${#fields.errors('password')}" th:text="${e}"
+									id="validationServer03Feedback" ></div>
+									
+							</div>
+
+							<div class="form-group">
+								<label for="about11">About</label>
+								<textarea name="about" th:value="${user.about}"
+									placeholder="Enter Something .." rows="3" class="form-control"></textarea>
+
+								<div class="form-group form-check text-center">
+									<input type="checkbox" name="agreement"
+										class="form-check-input" id="agreement" /> <label
+										for="agreement"> Accept Terms and Conditions</label>
+								</div>
+							</div>
+							<div class="container text-center">
+								<button type="submit"
+									class="btn bg-primary btn-block text-white ">Submit</button>
+
+								<button type="reset"
+									class="btn bg-warning  btn-block text-white  ">Reset</button>
+							</div>
+
+						</form>
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</section>
+</body>
+</html>
